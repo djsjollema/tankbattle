@@ -5,7 +5,8 @@ let image = new Image();
 image.src = 'Tanks_sheet.png';
 let sx,sy,sw,sh,x =0,y =0,w,h;
 let counter = 1;
-let vx =0 , vy = -1;
+let vx =-5 , vy = -2;
+let angle =0;
 
 image.addEventListener('load',()=>{
   //context.drawImage(image,0,0);
@@ -22,13 +23,39 @@ function animate(){
   sy = Math.floor(counter/8)*sh;
   w = sw;
   h = sh;
-  context.drawImage(image,sx,sy,sw,sh,x,y,w,h);
+  angle = Math.atan2(vy,vx) + Math.PI/2;
+  context.save();
+  context.translate(x,y);
+  context.rotate(angle);
+  context.drawImage(image,sx,sy,sw,sh,-16,-16,w,h);
+  context.restore();
   counter++;
   if(counter>7){
     counter = 1;
   }
-  if(y < 32){
+  if(y < -32){
     y = 320;
   }
-
+  if(y > 320){
+    y = -32;
+  }
+  if(x < -32){
+    x = 320;
+  }
+  if(x > 320){
+    x = -32;
+  }
 }
+
+addEventListener('keydown',(event)=>{
+  switch (event.key) {
+    case "ArrowRight":
+      vx += 1;
+      break;
+    case "ArrowLeft":
+      vx -= 1;
+      break;
+    default:
+
+  }
+})
