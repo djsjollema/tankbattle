@@ -1,4 +1,7 @@
-canvas{
-  background-color: aliceblue;
-  border:2px black solid;
+canvas {
+    margin:auto;
+    display: block;
+    width: 320px;
+    background-color: aliceblue;
+    border: 2px black solid;
 }
